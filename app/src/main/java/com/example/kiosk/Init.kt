@@ -187,7 +187,9 @@ class Init() {
     private fun addOrNot (product: Product, order: Order){
         if (validateInput(1, 2) == 1){
             order.orderList.add(product)
-            println("${product.name} 가 장바구니에 추가되었습니다.")
+            //ToDo: orderMap 에 put
+            putOrderMap(product, order)
+            println("${product.name} 가 장바구니에 추가되었습니다.\n")
         }
         displayMenu()
         selectMenu(order)
@@ -197,13 +199,16 @@ class Init() {
         var sum: Double = 0.0
         println("아래와 같이 주문 하시겠습니까?\n")
         println("[ Orders ]")
-        for(currentProduct in order.orderList){
+        for(product in order.orderMap){
+            var price = product.key.price * product.value
             println(
-                String.format("%-25s", currentProduct.name)
-                        + String.format("%-10s","| W ${currentProduct.price} ")
-//                        + "| ${order.orderMap.get(currentProduct.name)}개 "
-                        + "| ${currentProduct.detail}")
-            sum += currentProduct.price
+                String.format("%-25s", product.key.name)
+                        + String.format("%-10s","| W ${price} ")
+                        + "| ${product.value}개 "
+                        + "| ${product.key.detail}"
+            )
+            sum += price
+
         }
 
         println("\n[ Total ]\nW $sum")
@@ -230,6 +235,16 @@ class Init() {
         }else {
             displayMenu()
             selectMenu(order)
+        }
+    }
+
+    private fun putOrderMap(product: Product, order: Order) {
+        if (order.orderMap.containsKey(product)) {
+            var value = order.orderMap[product]!!
+            order.orderMap[product] = ++value
+
+        } else {
+            order.orderMap[product] = 1
         }
     }
 
