@@ -1,6 +1,6 @@
 package com.example.kiosk.menu
 
-import com.example.kiosk.Menu
+import com.example.kiosk.domain.Menu
 
 open class Drinks: Menu {
     override var category = "Drinks"

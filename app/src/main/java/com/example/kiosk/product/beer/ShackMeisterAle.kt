@@ -1,6 +1,6 @@
 package com.example.kiosk.product.beer
 
-import com.example.kiosk.Product
+import com.example.kiosk.domain.Product
 import com.example.kiosk.menu.Beer
 
 class ShackMeisterAle: Product, Beer() {

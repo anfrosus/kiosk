@@ -1,6 +1,6 @@
 package com.example.kiosk.product.frozenCustard
 
-import com.example.kiosk.Product
+import com.example.kiosk.domain.Product
 import com.example.kiosk.menu.FrozenCustard
 
 class ShackOfTheWeek: Product, FrozenCustard() {

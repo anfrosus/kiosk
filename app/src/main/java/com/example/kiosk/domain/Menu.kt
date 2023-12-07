@@ -1,4 +1,4 @@
-package com.example.kiosk
+package com.example.kiosk.domain
 
 interface Menu {
     var category:String

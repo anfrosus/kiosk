@@ -1,7 +1,5 @@
-package com.example.kiosk
+package com.example.kiosk.domain
 
-import android.os.Handler
-import android.os.Looper
 import com.example.kiosk.menu.Beer
 import com.example.kiosk.menu.Burgers
 import com.example.kiosk.menu.Drinks
@@ -57,6 +55,8 @@ class Init() {
         productList.add(frozenCustardList)
         productList.add(drinkList)
         productList.add(beerList)
+
+        initOption()
     }
 
     fun kiosk() {
@@ -173,9 +173,17 @@ class Init() {
     private fun selectProduct(selectedNum: Int, order: Order){
         var idx = validateInput(1, productList[selectedNum-1].size) - 1
         var product = productList[selectedNum-1][idx]
-        //ToDo: 옵션 존재한다면 바꿔주기
+        if(product is Option){
+            println(
+                String.format("%-25s", product.name)
+                        + String.format("%-10s", "| W ${product.price} ")
+                        + "| ${product.detail}"
+            )
+
+            product = selectOption(product)
+        }
         println(
-            String.format("%-25s", "${idx + 1}. ${product.name}")
+            String.format("%-25s", product.name)
                     + String.format("%-10s", "| W ${product.price} ")
                     + "| ${product.detail}"
         )
@@ -187,7 +195,6 @@ class Init() {
     private fun addOrNot (product: Product, order: Order){
         if (validateInput(1, 2) == 1){
             order.orderList.add(product)
-            //ToDo: orderMap 에 put
             putOrderMap(product, order)
             println("${product.name} 가 장바구니에 추가되었습니다.\n")
         }
@@ -223,8 +230,8 @@ class Init() {
                 println("주문이 완료되었습니다!\n\n" +
                         "대기번호는 [ ${orderNum++} ] 번 입니다.\n" +
                         "(3초후 메뉴판으로 돌아갑니다.)\n")
-                //ToDo: 3초 지연
-//                customDelay(3000)
+                Thread.sleep(3000)
+
                 displayMenu()
                 selectMenu(Order())
             }else {
@@ -248,10 +255,37 @@ class Init() {
         }
     }
 
-
-    fun customDelay(delayMillis: Long){
-        Handler(Looper.getMainLooper()).postDelayed({
-            // 실행 할 코드
-        }, delayMillis)
+    private fun hasOption(product: Product): Boolean{
+        return product is Option
     }
+    private fun initOption(){
+        for (products in this.productList){
+            for(product in products){
+                if (product is Option) {
+                    product.initializeOption(product)
+                }
+            }
+        }
+    }
+
+    private fun selectOption(product: Product): Product {
+        if(product is Option){
+            println("위 메뉴의 어떤 옵션으로 추가하시겠습니까?")
+            var keys = product.option.keys.toList()
+            var values = product.option.values.toList()
+            println("1.${keys[0]}(W ${values[0]})     2.${keys[1]}(W ${values[1]})")
+            if(validateInput(1, 2) == 1){
+                return product
+            }else{
+                //ToDo:옵션이 적용된 product
+                return product
+            }
+
+        }else{
+            return product
+        }
+
+
+    }
+
 }

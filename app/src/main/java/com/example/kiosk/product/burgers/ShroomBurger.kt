@@ -1,6 +1,6 @@
 package com.example.kiosk.product.burgers
 
-import com.example.kiosk.Product
+import com.example.kiosk.domain.Product
 import com.example.kiosk.menu.Burgers
 
 class ShroomBurger: Product, Burgers() {

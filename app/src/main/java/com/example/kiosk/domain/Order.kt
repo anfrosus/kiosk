@@ -1,4 +1,4 @@
-package com.example.kiosk
+package com.example.kiosk.domain
 
 class Order {
     var orderList = arrayListOf<Product>()
