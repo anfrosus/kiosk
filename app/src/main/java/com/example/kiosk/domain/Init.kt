@@ -39,7 +39,7 @@ class Init() {
         menuList.add(FrozenCustard())
         menuList.add(Drinks())
         menuList.add(Beer())
-        burgerList.add(ShackBurger())
+        burgerList.add(ShackBurger(""))
         burgerList.add(ShroomBurger())
         burgerList.add(CheeseBurger())
         burgerList.add(ShackStack())
@@ -195,6 +195,9 @@ class Init() {
     private fun addOrNot (product: Product, order: Order){
         if (validateInput(1, 2) == 1){
             order.orderList.add(product)
+            println("================테스트")
+            println(product.hashCode())
+            println(product.name)
             putOrderMap(product, order)
             println("${product.name} 가 장바구니에 추가되었습니다.\n")
         }
@@ -246,10 +249,10 @@ class Init() {
     }
 
     private fun putOrderMap(product: Product, order: Order) {
+        //ToDo: 왜 해시코드가 같지?
         if (order.orderMap.containsKey(product)) {
             var value = order.orderMap[product]!!
             order.orderMap[product] = ++value
-
         } else {
             order.orderMap[product] = 1
         }
@@ -277,8 +280,17 @@ class Init() {
             if(validateInput(1, 2) == 1){
                 return product
             }else{
-                //ToDo:옵션이 적용된 product
-                return product
+                //ToDo:다른 타입의 상품도 ||
+                if (product is ShackBurger){
+                    var productOption = product.copy()
+                    productOption.name = product.name + " (${keys[1]})"
+                    productOption.price = values[1]
+                    //ToDo: 왜 해시코드가 같지?
+                    return productOption
+                }else {
+                    return product
+                }
+
             }
 
         }else{
