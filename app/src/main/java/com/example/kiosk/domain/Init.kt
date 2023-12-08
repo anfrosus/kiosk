@@ -249,7 +249,6 @@ class Init() {
     }
 
     private fun putOrderMap(product: Product, order: Order) {
-        //ToDo: 왜 해시코드가 같지?
         if (order.orderMap.containsKey(product)) {
             var value = order.orderMap[product]!!
             order.orderMap[product] = ++value
@@ -280,12 +279,11 @@ class Init() {
             if(validateInput(1, 2) == 1){
                 return product
             }else{
-                //ToDo:다른 타입의 상품도 ||
                 if (product is ShackBurger){
                     var productOption = product.copy()
                     productOption.name = product.name + " (${keys[1]})"
                     productOption.price = values[1]
-                    //ToDo: 왜 해시코드가 같지?
+
                     return productOption
                 }else {
                     return product

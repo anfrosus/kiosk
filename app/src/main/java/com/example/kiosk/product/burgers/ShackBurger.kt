@@ -12,4 +12,7 @@ data class ShackBurger(var data: String): Product, Burgers(), Option {
     override var price = 6.9
     override var option = mutableMapOf<String, Double>()
 
+    override fun hashCode(): Int {
+        return super.hashCode()
+    }
 }
