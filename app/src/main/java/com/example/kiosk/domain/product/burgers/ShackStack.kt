@@ -1,7 +1,7 @@
-package com.example.kiosk.product.burgers
+package com.example.kiosk.domain.product.burgers
 
 import com.example.kiosk.domain.Product
-import com.example.kiosk.menu.Burgers
+import com.example.kiosk.domain.menu.Burgers
 
 class ShackStack: Product, Burgers() {
     override var name = "Shack Stack"

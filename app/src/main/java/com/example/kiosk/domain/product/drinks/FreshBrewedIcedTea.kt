@@ -1,7 +1,7 @@
-package com.example.kiosk.product.drinks
+package com.example.kiosk.domain.product.drinks
 
 import com.example.kiosk.domain.Product
-import com.example.kiosk.menu.Drinks
+import com.example.kiosk.domain.menu.Drinks
 
 class FreshBrewedIcedTea: Product, Drinks() {
     override var name = "Fresh Brewed Iced Tea"

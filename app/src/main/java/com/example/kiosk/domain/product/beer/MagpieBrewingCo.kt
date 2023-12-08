@@ -1,8 +1,8 @@
-package com.example.kiosk.product.beer
+package com.example.kiosk.domain.product.beer
 
 import com.example.kiosk.domain.Option
 import com.example.kiosk.domain.Product
-import com.example.kiosk.menu.Beer
+import com.example.kiosk.domain.menu.Beer
 
 class MagpieBrewingCo: Product, Beer, Option {
     override var name = "Magpie Brewing Co."

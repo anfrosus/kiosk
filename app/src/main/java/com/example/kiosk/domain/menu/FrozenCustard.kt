@@ -1,4 +1,4 @@
-package com.example.kiosk.menu
+package com.example.kiosk.domain.menu
 
 import com.example.kiosk.domain.Menu
 

@@ -1,7 +1,7 @@
-package com.example.kiosk.product.frozenCustard
+package com.example.kiosk.domain.product.frozenCustard
 
 import com.example.kiosk.domain.Product
-import com.example.kiosk.menu.FrozenCustard
+import com.example.kiosk.domain.menu.FrozenCustard
 
 class Concretes: Product, FrozenCustard() {
     override var name = "Concretes"

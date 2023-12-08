@@ -1,7 +1,7 @@
-package com.example.kiosk.product.frozenCustard
+package com.example.kiosk.domain.product.frozenCustard
 
 import com.example.kiosk.domain.Product
-import com.example.kiosk.menu.FrozenCustard
+import com.example.kiosk.domain.menu.FrozenCustard
 
 class ShackOfTheWeek: Product, FrozenCustard() {
     override var name = "Shake of the Week"

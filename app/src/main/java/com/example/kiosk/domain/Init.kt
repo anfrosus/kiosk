@@ -1,20 +1,20 @@
 package com.example.kiosk.domain
 
-import com.example.kiosk.menu.Beer
-import com.example.kiosk.menu.Burgers
-import com.example.kiosk.menu.Drinks
-import com.example.kiosk.menu.FrozenCustard
-import com.example.kiosk.product.beer.MagpieBrewingCo
-import com.example.kiosk.product.beer.ShackMeisterAle
-import com.example.kiosk.product.burgers.CheeseBurger
-import com.example.kiosk.product.burgers.ShackStack
-import com.example.kiosk.product.burgers.ShackBurger
-import com.example.kiosk.product.burgers.ShroomBurger
-import com.example.kiosk.product.drinks.FiftyFifty
-import com.example.kiosk.product.drinks.FreshBrewedIcedTea
-import com.example.kiosk.product.drinks.ShackMadeLemonade
-import com.example.kiosk.product.frozenCustard.Concretes
-import com.example.kiosk.product.frozenCustard.ShackOfTheWeek
+import com.example.kiosk.domain.menu.Beer
+import com.example.kiosk.domain.menu.Burgers
+import com.example.kiosk.domain.menu.Drinks
+import com.example.kiosk.domain.menu.FrozenCustard
+import com.example.kiosk.domain.product.beer.MagpieBrewingCo
+import com.example.kiosk.domain.product.beer.ShackMeisterAle
+import com.example.kiosk.domain.product.burgers.CheeseBurger
+import com.example.kiosk.domain.product.burgers.ShackStack
+import com.example.kiosk.domain.product.burgers.ShackBurger
+import com.example.kiosk.domain.product.burgers.ShroomBurger
+import com.example.kiosk.domain.product.drinks.FiftyFifty
+import com.example.kiosk.domain.product.drinks.FreshBrewedIcedTea
+import com.example.kiosk.domain.product.drinks.ShackMadeLemonade
+import com.example.kiosk.domain.product.frozenCustard.Concretes
+import com.example.kiosk.domain.product.frozenCustard.ShackOfTheWeek
 import java.lang.NumberFormatException
 
 class Init() {
@@ -39,7 +39,7 @@ class Init() {
         menuList.add(FrozenCustard())
         menuList.add(Drinks())
         menuList.add(Beer())
-        burgerList.add(ShackBurger(""))
+        burgerList.add(ShackBurger())
         burgerList.add(ShroomBurger())
         burgerList.add(CheeseBurger())
         burgerList.add(ShackStack())
@@ -195,9 +195,7 @@ class Init() {
     private fun addOrNot (product: Product, order: Order){
         if (validateInput(1, 2) == 1){
             order.orderList.add(product)
-            println("================테스트")
-            println(product.hashCode())
-            println(product.name)
+
             putOrderMap(product, order)
             println("${product.name} 가 장바구니에 추가되었습니다.\n")
         }
@@ -249,6 +247,7 @@ class Init() {
     }
 
     private fun putOrderMap(product: Product, order: Order) {
+
         if (order.orderMap.containsKey(product)) {
             var value = order.orderMap[product]!!
             order.orderMap[product] = ++value
@@ -280,11 +279,7 @@ class Init() {
                 return product
             }else{
                 if (product is ShackBurger){
-                    var productOption = product.copy()
-                    productOption.name = product.name + " (${keys[1]})"
-                    productOption.price = values[1]
-
-                    return productOption
+                    return product.copy(product, keys[1], values[1])
                 }else {
                     return product
                 }
